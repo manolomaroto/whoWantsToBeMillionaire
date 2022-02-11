@@ -3,6 +3,7 @@ import random
 class Contestant:
     number = 1
     points = 0
+    winner = False
     def __init__(self, name):
         self.name = name
         self.number = Contestant.number
@@ -39,15 +40,35 @@ def create_contestants(number_contestants):
     return total_constestants
 
 def first_question(contestants):
+    print('')
+    print('First question')
+    print('')
     for contesn in contestants:
-        response = input('What is the capital of France? ')
+        response = input(f'{contesn.name}, what is the capital of France? ')
         if response == 'Paris':
             contesn.points += random.random()
-            print(f'You have won {contesn.points} points')
+            contesn.winner = True
+            print(f'That is correct!!!')
         else:
             print(f'Oh no, {response} is not the correct response!')
+    
+    for contesn in contestants:
+        if contesn.winner == True:
+            next_round(contesn)
 
-
+def next_round(contesn):
+    print('')
+    print(f'{contesn.name} you are in the next round!!')
+    print('')
+    question = input('Whats is the highest mountain in the world? ')
+    if question == 'Everest':
+        print('')
+        print(f'{contesn.name} you are the best ever!!!')
+        print('')
+    else:
+        print('')
+        print('Oh, no. You lost 1 billion!!!')
+        print('')
 
 
 start()
