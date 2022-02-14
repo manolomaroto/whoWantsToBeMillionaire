@@ -44,6 +44,7 @@ def first_question(contestants):
     print('')
     print('First question')
     print('')
+    # List to save how long takes to each contestants to respond
     how_long = []
     for contesn in contestants:
         time_start = time.time()
@@ -52,6 +53,7 @@ def first_question(contestants):
         if response == 'Paris':
             contesn.points += random.random()
             contesn.winner = True
+            # Calculate how long takes to respond
             how_long.append(time_end - time_start)
             print(f'That is correct!!!')
         else:
@@ -59,6 +61,7 @@ def first_question(contestants):
 
     index_faster = how_long.index(min(how_long))
     for idx, contesn in enumerate(contestants):
+        # Look for the winner
         if contesn.winner == True and idx == index_faster:
             next_round(contesn)
 
