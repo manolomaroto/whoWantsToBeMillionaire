@@ -1,4 +1,5 @@
 import random
+import time
 
 class Contestant:
     number = 1
@@ -43,17 +44,22 @@ def first_question(contestants):
     print('')
     print('First question')
     print('')
+    how_long = []
     for contesn in contestants:
+        time_start = time.time()
         response = input(f'{contesn.name}, what is the capital of France? ')
+        time_end = time.time()
         if response == 'Paris':
             contesn.points += random.random()
             contesn.winner = True
+            how_long.append(time_end - time_start)
             print(f'That is correct!!!')
         else:
             print(f'Oh no, {response} is not the correct response!')
-    
-    for contesn in contestants:
-        if contesn.winner == True:
+
+    index_faster = how_long.index(min(how_long))
+    for idx, contesn in enumerate(contestants):
+        if contesn.winner == True and idx == index_faster:
             next_round(contesn)
 
 def next_round(contesn):
